@@ -11,14 +11,18 @@ A comprehensive template for managing Claude development sessions across multi-m
 ├── .gitignore                  # Excludes modules/ and sessions/
 ├── .claude/
 │   ├── sessions/              # Session files organized by module
+│   │   ├── .gitkeep          # Preserves directory structure
 │   │   ├── frontend/          # Frontend module sessions
-│   │   │   ├── .current-session
-│   │   │   ├── 2025-01-15-1030-task.md
+│   │   │   ├── .gitkeep      # Preserves directory structure
+│   │   │   ├── .current-session (created when session starts)
+│   │   │   ├── 2025-01-15-1030-task.md (example session)
 │   │   │   └── archive/       # Archived sessions
 │   │   ├── backend/           # Backend module sessions
-│   │   │   ├── .current-session
-│   │   │   └── 2025-01-15-1100-api.md
+│   │   │   ├── .gitkeep      # Preserves directory structure
+│   │   │   ├── .current-session (created when session starts)
+│   │   │   └── 2025-01-15-1100-api.md (example session)
 │   │   └── shared/            # Shared/general sessions
+│   │       └── .gitkeep      # Preserves directory structure
 │   └── commands/              # Session management commands
 ├── modules/                   # Module directories (git-ignored)
 │   ├── frontend/              # Each has own git repo
@@ -118,8 +122,10 @@ cd your-project
 /project:module-start frontend
 # This will:
 # - Check if modules/frontend/CLAUDE.md exists
+# - Create .claude/sessions/frontend/ directory if needed
 # - Display the module context
-# - Guide you through the setup process
+# - Guide you to: cd modules/frontend
+# - Then start session with: /project:session-start [task-name]
 ```
 
 **Option 2: Manual Setup**
@@ -139,6 +145,9 @@ cd your-project
 3. **Start Development Session**
    ```
    /project:session-start implement-user-auth
+   # Creates: .claude/sessions/frontend/2025-01-15-1030-implement-user-auth.md
+   # Updates: .claude/sessions/frontend/.current-session
+   # (Session file location detected from working directory: modules/frontend/)
    ```
 
 ### During Development
@@ -165,6 +174,28 @@ cd your-project
 ```
 
 This creates a comprehensive summary with git changes, completed tasks, and lessons learned.
+
+## How Session Commands Work
+
+### Directory Detection
+Session commands automatically detect which module you're working in:
+
+- **From module directory**: `cd modules/frontend` → sessions go to `.claude/sessions/frontend/`
+- **From project root**: Commands ask you to specify module or use "shared"
+- **From other directories**: Commands guide you to proper module location
+
+### Session File Organization
+```
+.claude/sessions/
+├── frontend/           # Frontend sessions
+│   ├── .current-session
+│   └── 2025-01-15-1030-task.md
+├── backend/            # Backend sessions  
+│   ├── .current-session
+│   └── 2025-01-15-1100-api.md
+└── shared/             # Cross-module sessions
+    └── 2025-01-15-1200-integration.md
+```
 
 ## Session Management Commands
 

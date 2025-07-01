@@ -5,10 +5,15 @@
 modules/
 
 # Exclude session files - these are local development artifacts
-.claude/sessions/
+.claude/sessions/**/*.md
+.claude/sessions/**/.current-session
+
+# Preserve session directory structure
+!.claude/sessions/.gitkeep
+!.claude/sessions/*/.gitkeep
+!.claude/sessions/*/archive/.gitkeep
 
 # Optional: Include empty directories for structure
-!.claude/sessions/.gitkeep
 !modules/.gitkeep
 
 # IDE files
