@@ -1,0 +1,35 @@
+# Claude Session Management Template .gitignore
+# Copy this to your workspace root
+
+# Exclude modules folder - each module has its own git repository
+modules/
+
+# Exclude session files - these are local development artifacts
+.claude/sessions/
+
+# Optional: Include empty directories for structure
+!.claude/sessions/.gitkeep
+!modules/.gitkeep
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
